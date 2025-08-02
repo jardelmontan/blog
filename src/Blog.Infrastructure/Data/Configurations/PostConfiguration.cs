@@ -15,12 +15,10 @@ namespace Blog.Infrastructure.Data.Configurations
 
             builder.Property(x => x.Title)
                 .IsRequired()
-                .HasMaxLength(150)
-                .IsUnicode();
+                .HasMaxLength(150);
 
             builder.Property(x => x.Content)
-                .IsRequired()
-                .IsUnicode();
+                .IsRequired();
 
             builder.HasOne(x => x.User)
                 .WithMany(m => m.Posts)

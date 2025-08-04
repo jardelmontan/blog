@@ -1,6 +1,4 @@
 ﻿using Blog.Application.Common.Interfaces;
-using Blog.Application.Features.Auth.Interfaces;
-using Blog.Application.Features.Auth.Services;
 using Blog.Domain.Common.Interfaces;
 using Blog.Domain.Interfaces;
 using Blog.Domain.Interfaces.Repositories;
@@ -26,7 +24,7 @@ namespace Blog.Infrastructure
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IPostRepository, PostRepository>();
 
             return services;
         }

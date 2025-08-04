@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Blog.Application.Common.Errors;
 using Blog.Application.Common.Interfaces;
 using Blog.Application.Features.Auth.Dtos;
 using Blog.Application.Features.Auth.Interfaces;

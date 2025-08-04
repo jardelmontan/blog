@@ -16,7 +16,6 @@ namespace Blog.Api.Controllers.V1
         /// <summary>
         /// Registers a user.
         /// </summary>
-        /// <returns></returns>
         [HttpPost("register")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
@@ -30,7 +29,6 @@ namespace Blog.Api.Controllers.V1
         /// <summary>
         /// Authenticate a user.
         /// </summary>
-        /// <returns>JWT authentication token</returns>
         [HttpPost("login")]
         [ProducesResponseType(typeof(LoginUserResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]

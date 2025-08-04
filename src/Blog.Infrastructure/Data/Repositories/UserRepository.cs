@@ -9,7 +9,7 @@ namespace Blog.Infrastructure.Data.Repositories
     {
         public async Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken)
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
+            return await _dbSet.FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
         }
     }
 }

@@ -1,7 +1,10 @@
 using Blog.Api.Configuration;
 using Blog.Application;
+using Blog.Application.Common.Interfaces;
 using Blog.Infrastructure;
 using System.Text.Json.Serialization;
+using Blog.Api.WebSocket.Hubs;
+using Blog.Api.WebSocket;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +13,10 @@ builder.Services.AddControllers()
     {
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
+
+builder.Services.AddSignalR();
+builder.Services.AddSingleton<IPostNotifierService, PostNotifierService>();
+
 
 builder.Services.AddApi(builder.Configuration);
 
@@ -36,5 +43,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<PostHub>("/posthub");
 
 await app.RunAsync();

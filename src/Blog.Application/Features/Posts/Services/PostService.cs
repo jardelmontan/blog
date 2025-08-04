@@ -1,4 +1,5 @@
 using AutoMapper;
+using Blog.Application.Common.Interfaces;
 using Blog.Application.Features.Auth;
 using Blog.Application.Features.Posts.Dtos;
 using Blog.Application.Features.Posts.Interfaces;
@@ -12,6 +13,7 @@ namespace Blog.Application.Features.Posts.Services
     public class PostService(
         IPostRepository _postRepository,
         IUserRepository _userRepository,
+        IPostNotifierService _postNotifierService,
         IUnitOfWork _unitOfWork,
         IMapper _mapper) : IPostService
     {
@@ -56,6 +58,16 @@ namespace Blog.Application.Features.Posts.Services
 
             await _postRepository.AddAsync(post, cancellationToken);
             await _unitOfWork.CommitAsync(cancellationToken);
+
+            var notificationDto = new NotifyPostCreatedDto
+            {
+                PostId = post.Id,
+                Title = post.Title,
+                CreatedAt = post.CreatedAt,
+                Author = user.Name
+            };
+
+            await _postNotifierService.PostCreated(notificationDto);
 
             var response = _mapper.Map<PostDto>(post);
 
